@@ -18,3 +18,5 @@ Cargo.lock
 
 # let CI/CD produce dist
 dist/
+
+assets/asperite
