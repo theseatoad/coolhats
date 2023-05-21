@@ -4,10 +4,16 @@ body {
     background-color: darkslateblue;
 }
 
+@media(max-width: 600px) {
+    .hide {
+        display: none;
+    }
+}
+
 canvas {
     background-color: grey;
-    padding-left: 0;
-    padding-right: 0;
+    padding-left: 15px;
+    padding-right: 15px;
     margin-left: auto;
     margin-right: auto;
     display: block;
