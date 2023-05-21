@@ -1,4 +1,4 @@
-
+# This requires rust toolchain. If CI/CI, need to install that first.
 ## Gets all deps
 deps: install_trunk
 
