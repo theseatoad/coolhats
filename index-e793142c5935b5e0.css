@@ -1,0 +1,27 @@
+body {
+    width: 100%;
+    text-align: center;
+    background-color: darkslateblue;
+}
+
+canvas {
+    background-color: grey;
+    padding-left: 0;
+    padding-right: 0;
+    margin-left: auto;
+    margin-right: auto;
+    display: block;
+    border: 10px solid #000000;
+}
+
+h1 {
+    margin: auto;
+    width: 50%;
+    border: 3px solid green;
+    background-color: green;
+    padding: 10px;
+}
+
+footer {
+    margin-top: auto;
+}
