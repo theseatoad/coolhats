@@ -1,0 +1,55 @@
+<!DOCTYPE html><html lang="en"><head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="/index-e793142c5935b5e0.css">
+    
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CoolHats</title>
+
+<link rel="preload" href="/coolhats-79f76c496c5df387_bg.wasm" as="fetch" type="application/wasm" crossorigin="">
+<link rel="modulepreload" href="/coolhats-79f76c496c5df387.js"></head>
+
+<body>
+    <div id="header">
+        <img src="assets/hat_cool.png" alt="hat_cool">
+        <img src="assets/hat_party.png" alt="hat_party">
+        <img src="assets/hat_witch.png" alt="hat_witch">
+        <img src="assets/coolhats.png" alt="coolhatlogo">
+        <img src="assets/hat_cool.png" alt="hat_cool">
+        <img src="assets/hat_party.png" alt="hat_party">
+        <img src="assets/hat_witch.png" alt="hat_witch">
+    </div>
+    <div id="game"></div>
+    <footer>
+        <p1>TheSeaToad©2023</p1>
+    </footer>
+
+
+<script type="module">import init from '/coolhats-79f76c496c5df387.js';init('/coolhats-79f76c496c5df387_bg.wasm');</script><script>(function () {
+    var protocol = window.location.protocol === 'https:' ? 'wss:' : 'ws:';
+    var url = protocol + '//' + window.location.host + '/_trunk/ws';
+    var poll_interval = 5000;
+    var reload_upon_connect = () => {
+        window.setTimeout(
+            () => {
+                // when we successfully reconnect, we'll force a
+                // reload (since we presumably lost connection to
+                // trunk due to it being killed, so it will have
+                // rebuilt on restart)
+                var ws = new WebSocket(url);
+                ws.onopen = () => window.location.reload();
+                ws.onclose = reload_upon_connect;
+            },
+            poll_interval);
+    };
+
+    var ws = new WebSocket(url);
+    ws.onmessage = (ev) => {
+        const msg = JSON.parse(ev.data);
+        if (msg.reload) {
+            window.location.reload();
+        }
+    };
+    ws.onclose = reload_upon_connect;
+})()
+</script></body></html>
