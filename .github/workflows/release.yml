@@ -1,0 +1,51 @@
+name: release-flow
+
+on:
+    workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  build-web:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+      - name: Install rust toolchain
+        uses: dtolnay/rust-toolchain@master
+        with:
+          toolchain: stable
+      - name: Install Dependencies
+        run: sudo apt-get update; sudo apt-get install pkg-config libx11-dev libasound2-dev libudev-dev
+      - name: Install trunk
+        uses: jetli/trunk-action@v0.1.0
+        with:
+          version: latest
+      - name: Add wasm target
+        run: |
+          rustup target add wasm32-unknown-unknown
+      - name: Build Release
+        run: |
+          trunk build --release
+      - name: Optimize Wasm
+        uses: NiklasEi/wasm-opt-action@v2
+        with:
+          file: dist/*.wasm
+      - name: Make paths relative
+        run: |
+          sed -i 's/\/index/.\/index/g' dist/index.html
+          sed -i 's/\/coolhats/.\/coolhats/g' dist/index.html
+      - name: Zip release
+        uses: vimtor/action-zip@v1
+        with:
+          files: dist/
+          dest: coolhats_web.zip
+      - name: Upload release
+        uses: svenstaro/upload-release-action@v2
+        with:
+          repo_token: ${{ secrets.GITHUB_TOKEN }}
+          file: coolhats_web.zip
+          asset_name: coolhats_web.zip
+          release_name: coolhats
+          overwrite: true
