@@ -1,13 +1,15 @@
-name: release-flow
+name: build, release, and publish
 
 on:
-    workflow_dispatch:
+    push:
+      branches:
+        - main
 
 permissions:
   contents: write
 
 jobs:
-  build-web:
+  everything:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repository
@@ -29,5 +31,4 @@ jobs:
       - name: Deploy to GitHub Pages
         uses: JamesIves/github-pages-deploy-action@v4.2.5
         with:
-            branch: main
             folder: dist
