@@ -40,12 +40,17 @@ jobs:
         uses: vimtor/action-zip@v1
         with:
           files: dist/
-          dest: coolhats_web.zip
+          dest: coolhats.zip
       - name: Upload release
         uses: svenstaro/upload-release-action@v2
         with:
           repo_token: ${{ secrets.GITHUB_TOKEN }}
-          file: coolhats_web.zip
-          asset_name: coolhats_web.zip
+          file: coolhats.zip
+          asset_name: coolhats.zip
           release_name: coolhats
           overwrite: true
+      - name: Deploy to GitHub Pages
+        uses: JamesIves/github-pages-deploy-action@v4.2.5
+        with:
+            branch: main
+            folder: dist
