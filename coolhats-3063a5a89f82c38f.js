@@ -1654,7 +1654,7 @@ async function __wbg_init(input) {
     if (wasm !== undefined) return wasm;
 
     if (typeof input === 'undefined') {
-        input = new URL('coolhats-fa731b9014ac4816_bg.wasm', import.meta.url);
+        input = new URL('coolhats-3063a5a89f82c38f_bg.wasm', import.meta.url);
     }
     const imports = __wbg_get_imports();
 
