@@ -71,7 +71,7 @@ pub const OPENGL_TO_WGPU_MATRIX: cgmath::Matrix4<f32> = cgmath::Matrix4::new(
     0.0, 0.0, 0.5, 1.0,
 );
 
-const NUM_INSTANCES_PER_ROW: u32 = 10;
+const NUM_INSTANCES_PER_ROW: u32 = 25;
 const INSTANCE_DISPLACEMENT: cgmath::Vector3<f32> = cgmath::Vector3::new(
     NUM_INSTANCES_PER_ROW as f32 * 0.5,
     0.0,
@@ -301,7 +301,7 @@ impl State {
         });
 
         let camera = Camera {
-            eye: (0.0, 5.0, 20.0).into(),
+            eye: (0.0, 25.0, 25.0).into(),
             target: (0.0, 0.0, 0.0).into(),
             up: cgmath::Vector3::unit_y(),
             aspect: config.width as f32 / config.height as f32,
@@ -503,7 +503,7 @@ impl State {
         );
         for instance in &mut self.instances {
             let mut current_pos = instance.position;
-            current_pos.y = ((self.tick / 10.0) + current_pos.x).sin();
+            current_pos.y = ((self.tick / 10.0) + current_pos.x + current_pos.z).sin();
             instance.position = current_pos;
         }
         let instance_data = self
